@@ -1,0 +1,11 @@
+{{#if @site.members_enabled}}
+    {{#unless @member}}
+        <section id="email-capture" class="contest-email gh-outer">
+            <div class="contest-email-inner gh-inner">
+                <h2 class="contest-email-title is-title">Get the Next Prompt</h2>
+                <p class="contest-email-description is-body">New prompts are announced at the start of each month. Subscribe to receive them directly.</p>
+                {{> "email-subscription" email_field_id="contest-email"}}
+            </div>
+        </section>
+    {{/unless}}
+{{/if}}

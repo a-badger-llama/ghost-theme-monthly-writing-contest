@@ -1,0 +1,41 @@
+<section class="contest-winners gh-outer">
+    <div class="contest-winners-inner gh-inner">
+        <h2 class="contest-section-title is-title">Past Winners</h2>
+
+        {{!--
+            Winners are posts tagged with #contest-winner (internal tag).
+            When no winners exist yet, the placeholder message is shown.
+            To add a winner: create a post with the winner's story and add the #contest-winner tag.
+        --}}
+
+        {{#get "posts" filter="tag:hash-contest-winner" limit="6" as |winners|}}
+            {{#if winners}}
+                <ul class="contest-winners-list">
+                    {{#foreach winners}}
+                        <li class="contest-winner-item">
+                            <a href="{{url}}" class="contest-winner-link">
+                                <span class="contest-winner-title is-title">{{title}}</span>
+                                {{#if primary_author}}
+                                    <span class="contest-winner-author">by {{primary_author.name}}</span>
+                                {{/if}}
+                                {{#if published_at}}
+                                    <span class="contest-winner-date">{{date published_at format="MMMM YYYY"}}</span>
+                                {{/if}}
+                            </a>
+                        </li>
+                    {{/foreach}}
+                </ul>
+                {{#get "posts" filter="tag:hash-contest-winner" limit="all" as |all_winners|}}
+                    {{#if (match all_winners.length ">" 6)}}
+                        <a href="/tag/contest-winner/" class="contest-winners-more">View all winners</a>
+                    {{/if}}
+                {{/get}}
+            {{else}}
+                <div class="contest-winners-placeholder">
+                    <p>Winners will be published here after each month's contest concludes.</p>
+                    <p>The first winner will be announced in March 2026.</p>
+                </div>
+            {{/if}}
+        {{/get}}
+    </div>
+</section>
