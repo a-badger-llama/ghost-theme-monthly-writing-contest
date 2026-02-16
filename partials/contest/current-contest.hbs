@@ -3,6 +3,19 @@
         {{!-- This Month's Prompt (dynamic) --}}
         <h2 class="contest-section-title is-title">Next Contest Details</h2>
 
+        {{!--
+            Create a post tagged "prompt" for each month's contest.
+            The post excerpt becomes the prompt/theme text.
+
+            To set contest details, add tags with these exact names
+            and put the display value in each tag's Description field:
+              - deadline  (e.g. "February 28, 2026")
+              - words     (e.g. "2,500 words")
+              - prize1    (e.g. "$100 + publication")
+              - prize2    (e.g. "$50")
+              - prize3    (e.g. "$25")
+        --}}
+
         {{#get "posts" filter="tag:prompt" limit="1" order="published_at desc" include="tags"}}
             {{#if posts}}
                 {{#foreach posts}}
@@ -15,54 +28,34 @@
                         </div>
                         <dl class="contest-current-details">
                             {{#foreach tags}}
-                                {{#match name "~^" "deadline="}}
+                                {{#match slug "deadline"}}
                                     <div class="contest-detail contest-detail-info">
                                         <dt>Deadline</dt>
-                                        {{#foreach (split name separator="=")}}
-                                            {{#if @last}}
-                                                <dd>{{this}}</dd>
-                                            {{/if}}
-                                        {{/foreach}}
+                                        <dd>{{description}}</dd>
                                     </div>
                                 {{/match}}
-                                {{#match name "~^" "words="}}
+                                {{#match slug "words"}}
                                     <div class="contest-detail contest-detail-info">
                                         <dt>Word Count</dt>
-                                        {{#foreach (split name separator="=")}}
-                                            {{#if @last}}
-                                                <dd>{{this}}</dd>
-                                            {{/if}}
-                                        {{/foreach}}
+                                        <dd>{{description}}</dd>
                                     </div>
                                 {{/match}}
-                                {{#match name "~^" "prize1="}}
+                                {{#match slug "prize1"}}
                                     <div class="contest-detail contest-detail-prize">
                                         <dt>1st Place</dt>
-                                        {{#foreach (split name separator="=")}}
-                                            {{#if @last}}
-                                                <dd>{{this}}</dd>
-                                            {{/if}}
-                                        {{/foreach}}
+                                        <dd>{{description}}</dd>
                                     </div>
                                 {{/match}}
-                                {{#match name "~^" "prize2="}}
+                                {{#match slug "prize2"}}
                                     <div class="contest-detail contest-detail-prize">
                                         <dt>2nd Place</dt>
-                                        {{#foreach (split name separator="=")}}
-                                            {{#if @last}}
-                                                <dd>{{this}}</dd>
-                                            {{/if}}
-                                        {{/foreach}}
+                                        <dd>{{description}}</dd>
                                     </div>
                                 {{/match}}
-                                {{#match name "~^" "prize3="}}
+                                {{#match slug "prize3"}}
                                     <div class="contest-detail contest-detail-prize">
                                         <dt>3rd Place</dt>
-                                        {{#foreach (split name separator="=")}}
-                                            {{#if @last}}
-                                                <dd>{{this}}</dd>
-                                            {{/if}}
-                                        {{/foreach}}
+                                        <dd>{{description}}</dd>
                                     </div>
                                 {{/match}}
                             {{/foreach}}
@@ -77,4 +70,3 @@
 
     </div>
 </section>
-

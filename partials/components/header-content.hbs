@@ -1,7 +1,7 @@
-<section class="gh-header is-{{#match headerStyle "Magazine"}}magazine{{else match headerStyle "Highlight"}}highlight{{else}}classic{{/match}}{{#if @custom.background_image}}{{#if @site.cover_image}} has-image{{/if}}{{/if}} gh-outer">
+<section class="gh-header is-{{#match headerStyle "Magazine"}}magazine{{else match headerStyle "Highlight"}}highlight{{else}}classic{{/match}}{{#if @custom.hero_background_image}}{{#if @site.cover_image}} has-image{{/if}}{{/if}} gh-outer">
 
     {{!-- Background image --}}
-    {{#if @custom.background_image}}
+    {{#if @custom.hero_background_image}}
         {{#match headerStyle "!=" "Magazine"}}
         {{#match headerStyle "!=" "Highlight"}}
             {{#if @site.cover_image}}
@@ -26,15 +26,11 @@
                 {{/foreach}}
             </div>
             <div class="gh-header-right">
-                {{#if @custom.show_featured_posts}}
-                    {{> "components/featured" showFeatured=@custom.show_featured_posts limit=6}}
-                {{else}}
-                    <div class="gh-featured-feed">
-                        {{#foreach posts from="5" limit="6"}}
-                            {{> "post-card" imageSizes="80px"}}
-                        {{/foreach}}
-                    </div>
-                {{/if}}
+                <div class="gh-featured-feed">
+                    {{#foreach posts from="5" limit="6"}}
+                        {{> "post-card" imageSizes="80px"}}
+                    {{/foreach}}
+                </div>
             </div>
         {{/match}}
 

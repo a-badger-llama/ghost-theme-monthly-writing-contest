@@ -25,7 +25,7 @@
                         </li>
                     {{/foreach}}
                 </ul>
-                {{#get "posts" filter="tag:hash-contest-winner" limit="all" as |all_winners|}}
+                {{#get "posts" filter="tag:hash-contest-winner" limit="100" as |all_winners|}}
                     {{#if (match all_winners.length ">" 6)}}
                         <a href="/tag/contest-winner/" class="contest-winners-more">View all winners</a>
                     {{/if}}

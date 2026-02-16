@@ -122,25 +122,11 @@
                 ],
                 "default": "Modern sans-serif"
             },
-            "signup_heading": {
-                "type": "text",
-                "description": "Used in your footer across your theme, defaults to site title when empty"
-            },
-            "signup_subheading": {
-                "type": "text",
-                "description": "Defaults to site description when empty"
-            },
             "hero_background_image": {
                 "type": "boolean",
                 "default": false,
                 "description": "Use the publication cover as the hero background",
                 "group": "homepage"
-            },
-            "show_featured_posts": {
-                "type": "boolean",
-                "default": false,
-                "group": "homepage",
-                "visibility": "header_style:[Highlight, Magazine]"
             },
             "post_feed_style": {
                 "type": "select",
