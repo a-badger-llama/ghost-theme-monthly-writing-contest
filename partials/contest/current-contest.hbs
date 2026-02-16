@@ -1,35 +1,80 @@
 <section class="contest-current gh-outer">
     <div class="contest-current-inner gh-inner">
-        <h2 class="contest-section-title is-title">This Month's Contest</h2>
-        <div class="contest-current-card">
-            <div class="contest-current-prompt">
-                <span class="contest-current-label">Prompt</span>
-                {{!--
-                    Edit the prompt text below for each month's contest.
-                    Keep it short and evocative.
-                --}}
-                <p class="contest-current-prompt-text is-title">"The thing you forgot to tell me."</p>
-            </div>
-            <dl class="contest-current-details">
-                <div class="contest-detail">
-                    <dt>Deadline</dt>
-                    {{!-- Update the deadline for each month --}}
-                    <dd>February 28, 2026</dd>
-                </div>
-                <div class="contest-detail">
-                    <dt>Word Limit</dt>
-                    <dd>2,500 words</dd>
-                </div>
-                <div class="contest-detail">
-                    <dt>Entry Fee</dt>
-                    <dd>Free</dd>
-                </div>
-                <div class="contest-detail">
-                    <dt>Prize</dt>
-                    <dd>Publication + Featured Author</dd>
-                </div>
-            </dl>
-            <a href="/submit/" class="gh-button contest-current-cta">Submit Your Story</a>
-        </div>
+        {{!-- This Month's Prompt (dynamic) --}}
+        <h2 class="contest-section-title is-title">Next Contest Details</h2>
+
+        {{#get "posts" filter="tag:prompt" limit="1" order="published_at desc" include="tags"}}
+            {{#if posts}}
+                {{#foreach posts}}
+                    <div class="contest-current-card">
+                        <div class="contest-current-prompt">
+                            <span class="contest-current-label">Theme</span>
+                            {{#if excerpt}}
+                                <p class="contest-current-prompt-text">{{excerpt}}</p>
+                            {{/if}}
+                        </div>
+                        <dl class="contest-current-details">
+                            {{#foreach tags}}
+                                {{#match name "~^" "deadline="}}
+                                    <div class="contest-detail contest-detail-info">
+                                        <dt>Deadline</dt>
+                                        {{#foreach (split name separator="=")}}
+                                            {{#if @last}}
+                                                <dd>{{this}}</dd>
+                                            {{/if}}
+                                        {{/foreach}}
+                                    </div>
+                                {{/match}}
+                                {{#match name "~^" "words="}}
+                                    <div class="contest-detail contest-detail-info">
+                                        <dt>Word Count</dt>
+                                        {{#foreach (split name separator="=")}}
+                                            {{#if @last}}
+                                                <dd>{{this}}</dd>
+                                            {{/if}}
+                                        {{/foreach}}
+                                    </div>
+                                {{/match}}
+                                {{#match name "~^" "prize1="}}
+                                    <div class="contest-detail contest-detail-prize">
+                                        <dt>1st Place</dt>
+                                        {{#foreach (split name separator="=")}}
+                                            {{#if @last}}
+                                                <dd>{{this}}</dd>
+                                            {{/if}}
+                                        {{/foreach}}
+                                    </div>
+                                {{/match}}
+                                {{#match name "~^" "prize2="}}
+                                    <div class="contest-detail contest-detail-prize">
+                                        <dt>2nd Place</dt>
+                                        {{#foreach (split name separator="=")}}
+                                            {{#if @last}}
+                                                <dd>{{this}}</dd>
+                                            {{/if}}
+                                        {{/foreach}}
+                                    </div>
+                                {{/match}}
+                                {{#match name "~^" "prize3="}}
+                                    <div class="contest-detail contest-detail-prize">
+                                        <dt>3rd Place</dt>
+                                        {{#foreach (split name separator="=")}}
+                                            {{#if @last}}
+                                                <dd>{{this}}</dd>
+                                            {{/if}}
+                                        {{/foreach}}
+                                    </div>
+                                {{/match}}
+                            {{/foreach}}
+                        </dl>
+                        <a href="/submit/" class="gh-button contest-current-cta">Submit Your Story</a>
+                    </div>
+                {{/foreach}}
+            {{else}}
+                <p>Prompt coming soon.</p>
+            {{/if}}
+        {{/get}}
+
     </div>
 </section>
+

@@ -1,11 +1,18 @@
-<section class="contest-hero gh-outer">
+<section class="contest-hero{{#if @custom.hero_background_image}}{{#if @site.cover_image}} has-background{{/if}}{{/if}} gh-outer">
+    {{log @custom}}
+
+    {{#if @custom.hero_background_image}}
+        {{#if @site.cover_image}}
+            <img class="contest-hero-bg" src="{{@site.cover_image}}" alt="">
+        {{/if}}
+    {{/if}}
     <div class="contest-hero-inner gh-inner">
         <h1 class="contest-hero-title is-title">A Monthly Short Fiction Contest</h1>
-        <p class="contest-hero-tagline is-body">One prompt. One month. One winner published.</p>
+        <p class="contest-hero-tagline is-body">One prompt. One Deadline. Real feedback.</p>
         <div class="contest-hero-actions">
             <a href="/submit/" class="gh-button contest-hero-cta">Submit a Story</a>
             {{#if @site.members_enabled}}
-                <a href="#email-capture" class="contest-hero-secondary">Get next month's prompt</a>
+                <a href="#/portal/signup" class="contest-hero-secondary">Get next month's prompt</a>
             {{/if}}
         </div>
     </div>
